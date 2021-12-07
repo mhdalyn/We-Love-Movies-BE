@@ -1,5 +1,5 @@
-const knex = require("../db/connection")
-const reduceProperties = require("../utils/reduce-properties")
+const knex = require("../db/connection");
+const reduceProperties = require("../utils/reduce-properties");
 
 const reduceMovies = reduceProperties("theater_id", {
     movie_id:["movies",null,"movie_id"],
@@ -17,7 +17,7 @@ function listShowings (movie_id) {
         .join("movies_theaters as mt", "mt.theater_id","t.theater_id")
         .select("*")
         .where({movie_id})
-}
+};
 
 function list() {
     return knex("theaters as t")
@@ -25,9 +25,9 @@ function list() {
         .join("movies as m","m.movie_id","mt.movie_id")
         .select("*")
         .then(moviesList => reduceMovies(moviesList));
-}
+};
 
 module.exports = {
     listShowings,
     list,
-}
+};
