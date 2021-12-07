@@ -4,9 +4,6 @@ const methodNotAllowed = require("../error/methodNotAllowed");
 
 async function list (req,res,next) {
     const movieId = Number(req.params.movieId);
-    if (!movieId) {
-        methodNotAllowed(req,res,next);
-    }
     let data = await service.list(movieId);
     res.json({data})
 }
