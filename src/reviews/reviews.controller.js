@@ -1,6 +1,5 @@
 const service = require("./reviews.service");
 const asyncErrorBoundary = require("../error/asyncErrorBoundary");
-const methodNotAllowed = require("../error/methodNotAllowed");
 
 async function list (req,res,next) {
     const movieId = Number(req.params.movieId);
@@ -25,7 +24,7 @@ async function update (req,res,next) {
     const review = {...req.body.data, review_id:res.locals.review.review_id};
     await service.update(review);
     let updatedReview = await service.read(review.review_id);
-    updatedReview = {...updatedReview, critic: await service.readCritic(updatedReview.critic_id)};
+    updatedReview.critic = await service.readCritic(updatedReview.critic_id);
     res.json({ data: updatedReview });
 };
 
