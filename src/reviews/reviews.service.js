@@ -34,9 +34,8 @@ function read(review_id) {
 
 function update(updatedReview) {
     return knex("reviews")
-        .select("*")
-        .where({ "review_id": updatedReview.review_id })
         .update(updatedReview, "*")
+        .where({ "review_id": updatedReview.review_id })
 };
 
 function destroy(review_id) {
